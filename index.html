@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Info</title>
+</head>
+<h1 align="center">Info page</h1>
+<body>
+<h2 align="center">Server settings</h2>
+<table align="center" style="height:150px;width:550px;overflow:auto">
+    <thead ><th>Prefix (decimal)</th><th> Number of request</th><th>Limit time</th><th>Ban time</th></th><th>Delete time</th><th></th></thead>
+    <tr align="center">
+        <td>{{.ServSet.Prefix}}</td>
+        <td>{{.ServSet.NumCon}}</td>
+        <td>{{.ServSet.LimitTime}}</td>
+        <td>{{.ServSet.BanTime}}</td>
+        <td>{{.ServSet.DeleteTime}}</td>
+        </td>
+    </tr>
+</table>
+<div style="overflow: hidden;">
+    <div style="width: 50%;">
+        <div style="float:left;height:550px;width:250px;overflow:auto">
+    <h2 align="center">Connected IP's</h2>
+<table  align="center">
+    <thead><th>Id</th><th></th><th></th><th>IP's</th></thead>
+    {{range .Ips }}
+        <tr>
+            <td >{{ .Id }}</td>
+            <td></td><td></td>
+            <td >{{ .Ip }}</td>
+        </tr>
+    {{end}}
+</table>
+</div>
+        <div style="float:left;height:550px;width:350px;overflow:auto">
+    <h2 align="center">Restricted Subnet</h2>
+    <table align="center">
+        <thead ><th>Id</th><th></th><th></th><th>Subnet's</th><th></th><th></th><th>Time left</th></thead>
+        {{range .Ban }}
+            <tr>
+                <td>{{.Id}}</td>
+                <td></td><td></td>
+                <td>{{.Subnet}}</td>
+                <td></td><td></td>
+                <td>{{.TimeLeft}}</td>
+                <td></td><td></td>
+            </tr>
+        {{end}}
+    </table>
+</div>
+        <div align="center">
+            <h3>Input ip address of subnet to delete from restricted list</h3>
+            <form method="POST" action="/delete">
+                <label>Address</label><input name="address" type="text" value="" />
+                <input type="submit" value="submit" />
+            </form>
+        </div>
+    </div>
+</div>
+</body>
+</html>
