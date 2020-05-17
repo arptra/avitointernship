@@ -6,24 +6,24 @@ def handler():
     try:
         limit = int(entry_limit.get())
         prefix = int(entry_prefix.get())
-        _, set_ip = getSetIp(prefix, limit)
+        _, set_ip = get_iplist(prefix, limit)
         output.delete("0.0", "end")
         [output.insert("0.0", item + '\n') for item in set_ip]
     except ValueError:
         output.delete("0.0", "end")
-        output.insert("0.0", "Введите значения")
+        output.insert("0.0", "Input value")
 
 def handler_random_ip():
-    ip = randomIp()
+    ip = random_ip()
     output.delete("0.0", "end")
     output.insert("0.0", str(ip) + '\n')
-    status = makeReq(ip)
+    status = make_req(ip)
     output.insert("0.0", "status code from server = " + str(status) + '\n')
 
 
 root = Tk()
 
-label1 = Label(root, text="Генератор ip-адресов")
+label1 = Label(root, text="Client for ip request")
 label1.grid()
 
 frame = Frame(root)

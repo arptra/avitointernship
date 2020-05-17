@@ -1,0 +1,13 @@
+version: "3"
+services:
+  server:
+    build: server/
+    command: /app/main
+    ports:
+      - 8181:8181
+  client:
+    build: client/
+    command: python ext_test/tester.py
+    network_mode: host
+    depends_on:
+      - server
