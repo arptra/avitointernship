@@ -1,6 +1,7 @@
 package ratelimit
 
 import (
+	"flag"
 	"fmt"
 	"html/template"
 	"log"
@@ -34,23 +35,29 @@ type Settings struct {
 }
 
 // Change the the map to hold values of the type visitor.
-var Visitors = make(map[string]*visitor)
+var RstrctdLst = make(map[string]*visitor)
 var Mu sync.Mutex
+var Conf *Settings
 
 // Run a background goroutine to remove old entries from the visitors map.
 func init() {
 	go cleanupVisitors()
 }
 
-func InitSettings() *Settings {
-	defVal := &Settings{
-		24,
-		100,
-		1 * time.Minute,
-		2 * time.Minute,
-		1 * time.Minute,
+func InitSettings() {
+	prefix := flag.Int("p", 24, "an int")
+	NumCon := flag.Int("nc", 100, "an int")
+	LimitTime := flag.Int("lt", 1, "an int")
+	BanTime := flag.Int("bt", 2, "an int")
+	DeleteTime := flag.Int("dt", 1, "an int")
+	flag.Parse()
+	Conf = &Settings{
+		*prefix,
+		*NumCon,
+		time.Duration(*LimitTime) * time.Minute,
+		time.Duration(*BanTime) * time.Minute,
+		time.Duration(*DeleteTime) * time.Minute,
 	}
-	return defVal
 }
 
 func GetIp(req *http.Request) (string, error) {
@@ -72,28 +79,27 @@ func IpSubNet(ip string, prefix int) string {
 	return IpSub
 }
 
-func getVisitor(ip string, params *Settings) *visitor {
+func getVisitor(ip string) *visitor {
 	Mu.Lock()
 	defer Mu.Unlock()
 
-	rateLim := params.LimitTime
-	banTime := params.BanTime
-	prefix := params.Prefix
-	numCon := params.NumCon
+	rateLim := Conf.LimitTime
+	banTime := Conf.BanTime
+	prefix := Conf.Prefix
+	numCon := Conf.NumCon
 	IpSub := IpSubNet(ip, prefix)
-	v, exists := Visitors[IpSub]
+	v, exists := RstrctdLst[IpSub]
 	if !exists {
 		// Include the current time when creating a new visitor.
-		Visitors[IpSub] = &visitor{time.Now(), time.Now(), 1, false}
-		return Visitors[IpSub]
+		RstrctdLst[IpSub] = &visitor{time.Now(), time.Now(), 1, false}
+		return RstrctdLst[IpSub]
 	}
 	v.numOfCon++
 	if v.Restrict == false && (v.numOfCon >= numCon && time.Since(v.firstSeen) <= rateLim) {
-		fmt.Println(v.numOfCon)
 		v.Restrict = true
 		v.BanTime = time.Now()
 	} else if v.Restrict == true && time.Since(v.BanTime) > banTime {
-		delete(Visitors, IpSub)
+		delete(RstrctdLst, IpSub)
 	}
 	return v
 }
@@ -101,21 +107,20 @@ func getVisitor(ip string, params *Settings) *visitor {
 // Every minute check the map for visitors that haven't been seen for
 // more than 2 minutes and delete the entries.
 func cleanupVisitors() {
-	params := InitSettings()
 	for {
-		time.Sleep(params.DeleteTime)
+		time.Sleep(Conf.DeleteTime)
 		Mu.Lock()
-		banTime := params.BanTime
-		for ip, v := range Visitors {
+		banTime := Conf.BanTime
+		for ip, v := range RstrctdLst {
 			if time.Since(v.BanTime) > banTime {
-				delete(Visitors, ip)
+				delete(RstrctdLst, ip)
 			}
 		}
 		Mu.Unlock()
 	}
 }
 
-func Limit(next http.Handler, params *Settings) http.Handler {
+func Limit(next http.Handler) http.Handler {
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		ip, err := GetIp(r)
 		if err != nil {
@@ -126,15 +131,15 @@ func Limit(next http.Handler, params *Settings) http.Handler {
 				return
 			}
 		}
-		limiter := getVisitor(ip, params)
-		if limiter.Restrict == true {
-			tmpl, _ := template.ParseFiles("./static/429.html")
-			w.WriteHeader(429)
-			desc := errorInfo{}
-			desc.NumReq = params.NumCon
-			desc.TimeBan = params.BanTime.String()
-			tmpl.Execute(w, desc)
-			return
+		if ip != "::1" {
+			limiter := getVisitor(ip)
+			if limiter.Restrict == true {
+				tmpl, _ := template.ParseFiles("./static/429.html")
+				w.WriteHeader(429)
+				desc := errorInfo{Conf.NumCon, Conf.BanTime.String()}
+				tmpl.Execute(w, desc)
+				return
+			}
 		}
 		next.ServeHTTP(w, r)
 	})
