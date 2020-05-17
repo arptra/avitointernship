@@ -145,7 +145,7 @@ def func_test(limit, amount):
     prefix_set = range(0, 32)[::-1]
     for prefix in prefix_set:
         if 23 < prefix < 32:
-            set_settings(prefix, limit, 1, 2, 1)
+            set_settings(prefix, limit, 1, 1, 1)
             start_ip = str(128) + '.' + str(1) + '.' + str(1)
             ip_set = generate(start_ip, prefix, amount)
             #[print(item) for item in ip_set]
@@ -154,7 +154,7 @@ def func_test(limit, amount):
                   "TEST_RAISE_429_STATUS = ", req_for_raise_429(limit, ip_set),
                   "TEST_CHECK_429_STATUS = ", check_after_raise_429(limit, ip_set))
         elif 15 < prefix < 24:
-            set_settings(prefix, limit, 1, 2, 1)
+            set_settings(prefix, limit, 1, 1, 1)
             start_ip = str(128) + '.' + str(1)
             ip_set = generate(start_ip, prefix, amount)
             #[print(item) for item in ip_set]
@@ -163,7 +163,7 @@ def func_test(limit, amount):
                   "TEST_RAISE_429_STATUS = ", req_for_raise_429(limit, ip_set),
                   "TEST_CHECK_429_STATUS = ", check_after_raise_429(limit, ip_set))
         elif 7 < prefix < 16:
-            set_settings(prefix, limit, 1, 2, 1)
+            set_settings(prefix, limit, 1, 1, 1)
             start_ip = str(128)
             ip_set = generate(start_ip, prefix, amount)
             #[print(item) for item in ip_set]
@@ -172,7 +172,7 @@ def func_test(limit, amount):
                   "TEST_RAISE_429_STATUS = ", req_for_raise_429(limit, ip_set),
                   "TEST_CHECK_429_STATUS = ", check_after_raise_429(limit, ip_set))
         elif 0 < prefix < 8:
-            set_settings(prefix, limit, 1, 2, 1)
+            set_settings(prefix, limit, 1, 1, 1)
             start_ip = "128"
             ip_set = generate(start_ip, prefix, amount)
             #[print(item) for item in ip_set]
