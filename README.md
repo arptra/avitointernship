@@ -37,3 +37,28 @@ then the main page will be available (Info pag)
 
 ![Alt_text](https://github.com/arptra/avitointernship/blob/master/pic/to_many_request.png)  
 
+#### Another way to build an application from source, for this  
+You must have installed golange 1.14 and python3.  
+Run next command:  
+```
+git clone https://github.com/arptra/avitointernship.git
+cd avitointernship/server
+go mod download
+go build -o app main.go
+./app
+```  
+With this launch, you can use the flags  
+```
+./app -p=24 -nc=100 -lt=1 -bt=2 -dt=1
+```
+```
+-p    prefix  in decimal  
+-nc   Number of request  
+-lt   limite time (time during which it is possible to make a limited number of requests)  
+-bt   ban time (how long you will in restricted list)  
+-dt   delete time (time after which the routine starts and deletes all obsolete entries in the restricted list)  
+time is set in minutes  
+```  
+
+
+
