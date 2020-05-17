@@ -3,7 +3,7 @@ Create an HTTP service that can limit the number of requests from one IPv4 subne
 [Original test task from Antibot Avito Information Security unit](https://github.com/avito-tech/antibot-developer-trainee)  
 
 ## A brief overview of what I did  
-I implemented:
+#### I implemented:
 1) Сlient part on `Python`.  
 2) Server part on `Golang`.  
 3) Ability to run using `docker-compose up`.  
@@ -11,7 +11,16 @@ I implemented:
 5) `handler` to reset the restriction on the subnet address.  
 6) `Testing` the functioning of the service.
 7) A simple Info webpage to display the necessary information about the service (settings, limited networks, connections), as    well as the ability to reconfigure the service while it run.  
+  
 ![Alt Text](https://github.com/arptra/avitointernship/blob/master/pic/infopage.jpeg)  
+  
+#### What did I use for this  
+1) Ubuntu 18.04.4 LTS (all of my code run and tests on this system).  
+2) Golang 1.14 with module github.com/gorilla/mux v1.7.4.  
+3) Python 3.6 with module request and tkinter
+4) Docker version 19.03.8, build afacb8b7f0
+5) Docker-compose version 1.25.3, build d4d1b42b  
+  
 # How to use  
 The fastest way to start using  `docker-compose up`
 ```
@@ -57,7 +66,7 @@ With this launch, you can use the flags
 -lt   limite time (time during which it is possible to make a limited number of requests)  
 -bt   ban time (how long you will in restricted list)  
 -dt   delete time (time after which the routine starts and deletes all obsolete entries in the restricted list)  
-time is set in minutes  
+  all time is set in minutes  
 ```  
 
 
