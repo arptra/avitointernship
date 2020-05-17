@@ -1,13 +1,12 @@
 from tkinter import *
-from ext_test.tester import *
+from .tester import *
 
 
 def handler():
     try:
         limit = int(entry_limit.get())
         prefix = int(entry_prefix.get())
-        start_ip = str(entry_startip.get())
-        set_ip = randomIpSet(limit, prefix, start_ip)
+        _, set_ip = getSetIp(prefix, limit)
         output.delete("0.0", "end")
         [output.insert("0.0", item + '\n') for item in set_ip]
     except ValueError:
@@ -40,11 +39,6 @@ label3 = Label(frame, text='prefix:')
 label3.grid(row=1, column=3)
 entry_prefix = Entry(frame, width=10, borderwidth=2)
 entry_prefix.grid(row=1, column=4)
-# startIP
-label4 = Label(frame, text='start IP:')
-label4.grid(row=1, column=5)
-entry_startip = Entry(frame, width=15, borderwidth=2)
-entry_startip.grid(row=1, column=6)
 # Generate
 button1 = Button(frame, text="Generate", command=handler)
 button1.grid(row=1, column=7, padx=(10, 0))

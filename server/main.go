@@ -8,7 +8,7 @@ import (
 	"strconv"
 	"time"
 
-	"github.com/arptra/avitointernship/pkg/ratelimit"
+	"avitointernship/server/pkg/ratelimit"
 )
 
 type infoBan struct {

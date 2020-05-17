@@ -1,6 +1,5 @@
 from requests import get
 from requests import post
-import ipaddress
 from random import randint
 
 
@@ -26,14 +25,6 @@ def randomIp():
     d = randint(0, 255)
     ip = str(a) + '.' + str(b) + '.' + str(c) + '.' + str(d)
     return ip
-
-
-def randomIpSet(limit, prefix, startIp):
-    subnet1 = ipaddress.ip_network(startIp + '/' + str(prefix))
-    addrspace = list(subnet1.hosts())
-    numOfAddr = len(list(subnet1.hosts()))
-    ip_list = [str(addrspace[randint(0, numOfAddr - 1)]) for _ in range(limit)]
-    return ip_list
 
 
 def req_for_raise_429(limit, ip_set):
