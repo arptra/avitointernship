@@ -21,6 +21,10 @@ Create an HTTP service that can limit the number of requests from one IPv4 subne
 4) Docker version 19.03.8, build afacb8b7f0
 5) Docker-compose version 1.25.3, build d4d1b42b  
   
+### How I realize:
+1) [Rate limit function](https://github.com/arptra/avitointernship/wiki)
+2) [Testing function](https://github.com/arptra/avitointernship/wiki)
+  
 # How to use  
 The fastest way to start using  `docker-compose up`
 ```
