@@ -85,6 +85,10 @@ python3 -m ext_test.client
 
 It has two main functions.
 1) Generate a list of IP addresses from the same subnet and make a request to the server from each server (first line)
-2) Generate a random IP address and make a server request from it (Second line)
-
-
+2) Generate a random IP address and make a server request from it (Second line)  
+  
+# Undefined behavior  
+1) If the header `X-Forwarded-For` will be something other than an IP address v4, for example:
+  - 23421342342,  
+  - 23412.evg.234.12,
+  - a.b.c.d  
