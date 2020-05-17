@@ -68,6 +68,19 @@ With this launch, you can use the flags
 -dt   delete time (time after which the routine starts and deletes all obsolete entries in the restricted list)  
   all time is set in minutes  
 ```  
-
+# Client
+After service have started you can run client with visual mode.  
+For this you need installed python3 and module request.  
+```  
+pip3 install request  
+```  
+```
+cd avitointernship/client
+```
+and run
+```
+python3 -m ext_test.client
+```
+![Alt_test](https://github.com/arptra/avitointernship/blob/master/pic/client.png)
 
 
