@@ -21,3 +21,5 @@ after cloning, move to this directory and run
 ```
 docker-compose up
 ```
+When the containers start, you will see the following on the command line  
+
