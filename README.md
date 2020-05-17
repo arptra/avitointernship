@@ -30,4 +30,7 @@ These are two types of tests in the picture:
 1) TEST_RAISE_429  
 2) TEST_CHECK_429  
 ```  
-What they mean and how I test can be read more on my [wiki](https://github.com/arptra/avitointernship/wiki)
+What they mean and how I test can be read more on my [wiki](https://github.com/arptra/avitointernship/wiki)  
+If you open your browser(I recommended full screen for right rendering page) and go to http://localhost:8181,  
+you will receive a message about the restriction (this is due to testing), you will need to wait a minute,  
+then the main page will be available (Info pag)  
