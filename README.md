@@ -12,4 +12,12 @@ I implemented:
 6) `Testing` the functioning of the service.
 7) A simple Info webpage to display the necessary information about the service (settings, limited networks, connections), as    well as the ability to reconfigure the service while it run.  
 ![Alt Text](https://github.com/arptra/avitointernship/blob/master/pic/infopage.jpeg)  
-# How to use
+# How to use  
+The fastest way to start using  `docker-compose up`
+```
+git clone https://github.com/arptra/avitointernship.git  
+```
+after cloning, move to this directory and run
+```
+docker-compose up
+```
