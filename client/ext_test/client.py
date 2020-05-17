@@ -8,7 +8,7 @@ def handler():
         prefix = int(entry_prefix.get())
         _, set_ip = get_iplist(prefix, limit)
         output.delete("0.0", "end")
-        [output.insert("0.0", item + '\n') for item in set_ip]
+        [output.insert("0.0", item + " status code from server = " + str(make_req(item)) + '\n') for item in set_ip]
     except ValueError:
         output.delete("0.0", "end")
         output.insert("0.0", "Input value")
