@@ -24,6 +24,11 @@ Create an HTTP service that can limit the number of requests from one IPv4 subne
 #### How I realize:
 1) [Rate limit function](https://github.com/arptra/avitointernship/wiki)
 2) [Testing function](https://github.com/arptra/avitointernship/wiki)
+
+#### What needs to be improved
+1) Make a more severe error management
+2) Add a handler to clear all entries
+3) Add the ability to set the time in seconds and hours
   
 # How to use  
 The fastest way to start using  `docker-compose up`
