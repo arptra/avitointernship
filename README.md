@@ -26,6 +26,8 @@ When the containers start, you will see the following on the command line
 ![Alt Text](https://github.com/arptra/avitointernship/blob/master/pic/docker_compose_up.jpeg)
 When the container with the server starts, the container with the client starts and run test  
 These are two types of tests in the picture:  
+```
 1) TEST_RAISE_429  
 2) TEST_CHECK_429  
+```  
 What they mean and how I test can be read more on my [wiki](https://github.com/arptra/avitointernship/wiki)
