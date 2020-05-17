@@ -34,3 +34,6 @@ What they mean and how I test can be read more on my [wiki](https://github.com/a
 If you open your browser(I recommended full screen for right rendering page) and go to http://localhost:8181,  
 you will receive a message about the restriction (this is due to testing), you will need to wait a minute,  
 then the main page will be available (Info pag)  
+
+![Alt_text](https://github.com/arptra/avitointernship/blob/master/pic/to_many_request.png)  
+
