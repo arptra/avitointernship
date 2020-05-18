@@ -22,8 +22,8 @@ Create an HTTP service that can limit the number of requests from one IPv4 subne
 5) Docker-compose version 1.25.3, build d4d1b42b  
   
 #### How I realize:
-1) [Rate limit function](https://github.com/arptra/avitointernship/wiki)
-2) [Testing function](https://github.com/arptra/avitointernship/wiki)
+1) [Rate limit function](https://github.com/arptra/avitointernship/wiki#rate-limit)
+2) [Testing function](https://github.com/arptra/avitointernship/wiki#test)
 
 #### What needs to be improved
 1) Make a more severe error management
@@ -48,7 +48,7 @@ These are two types of tests in the picture:
 1) TEST_RAISE_429  
 2) TEST_CHECK_429  
 ```  
-What they mean and how I test can be read more on my [wiki](https://github.com/arptra/avitointernship/wiki)  
+What they mean and how I test can be read more on my [wiki](https://github.com/arptra/avitointernship/wiki#test)  
 If you open your browser(I recommended full screen for right rendering page) and go to http://localhost:8181,  
 you will receive a message about the restriction (this is due to testing), you will need to wait a minute,  
 then the main page will be available (Info pag)  
